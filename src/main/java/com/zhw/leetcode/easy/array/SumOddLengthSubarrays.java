@@ -33,14 +33,9 @@ public class SumOddLengthSubarrays {
         for (int i = 0; i < arr.length; i++) {
             for (int j = i; j < arr.length; j+=2) {
                 if (i == 0) {
-                    System.out.println(prefixArr[j]);
                     sum += prefixArr[j];
                 } else {
-                    System.out.println("==================");
-                    System.out.println(j);
-                    System.out.println(i);
-                    System.out.println("prefixArr[j]: " + prefixArr[j] + ",prefixArr[i-1] : " + prefixArr[i-1] +", : " + (prefixArr[j]-prefixArr[i-1]));
-
+                    // 前缀和特性
                     sum += prefixArr[j]-prefixArr[i-1];
                 }
             }
