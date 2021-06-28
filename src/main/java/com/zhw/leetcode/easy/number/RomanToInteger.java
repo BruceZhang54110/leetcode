@@ -19,7 +19,6 @@ public class RomanToInteger {
     public static void main(String[] args) {
         RomanToInteger romanToInteger = new RomanToInteger();
         System.out.println(romanToInteger.trans("XXVII"));
-
         System.out.println();
     }
 
