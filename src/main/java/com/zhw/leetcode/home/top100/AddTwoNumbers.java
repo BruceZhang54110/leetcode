@@ -52,7 +52,7 @@ public class AddTwoNumbers {
             int sum = n1 + n2 + carry;
             head.next = new ListNode(sum % 10);
             head = head.next; // head 前进一位
-            carry = sum / 10; // 计算进位,取整除的整数 
+            carry = sum / 10; // 计算进位,取整除的整数edddd
             if (l1 != null) {
                 l1 = l1.next;
             }
