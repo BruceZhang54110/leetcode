@@ -19,7 +19,7 @@ import java.util.Map;
  *         return res;
  *     }
  * }
- *
+ * 无重复字符的最长子串
  * 作者：maczhen
  * 链接：https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/solution/3-wu-zhong-fu-zi-fu-de-zui-chang-zi-chua-xjeu/
  * 来源：力扣（LeetCode）
