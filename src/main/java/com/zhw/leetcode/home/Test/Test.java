@@ -7,8 +7,6 @@ public class Test {
         linked.add(1, 2);
         linked.add(2, 3);
 
-        for (int ) {
-
-        }
      }
+
 }

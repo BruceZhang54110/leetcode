@@ -1,13 +1,6 @@
 package com.zhw.leetcode.home.Test;
 
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int x) {
-        val = x;
-    }
 
-}
 
 public class MyLinkedList {
     int size;
@@ -75,6 +68,15 @@ public class MyLinkedList {
             pred = pred.next;
         }
         pred.next = pred.next.next;
+    }
+
+    public static class ListNode {
+        int val;
+        ListNode next;
+        ListNode(int x) {
+            val = x;
+        }
+
     }
 }
 
