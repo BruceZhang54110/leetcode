@@ -31,6 +31,9 @@ package com.zhw.leetcode.top;
  * 0 <= Node.val <= 9
  * 题目数据保证列表表示的数字不含前导零
  *
+ * 如果两个链表的长度分别是a，b; 时间复杂度：O(max(a,b))
+ * 从头结点开始，个位，十位，百位。。。
+ * ==============================
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/add-two-numbers
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
@@ -45,4 +48,54 @@ package com.zhw.leetcode.top;
  * }
  */
 public class AddTwoNumbers {
+
+    /**
+     * 两数相加
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode head = null;
+        ListNode tail = null;
+        // 进位值
+        int carry = 0;
+        while (l1 != null || l2 != null) {
+            int n1 = l1 != null ? l1.val:0;
+            int n2 = l2 != null ? l2.val:0;
+            int sum = n1 + n2 + carry;
+            if (head == null) {
+                // sum对10取模来计算出进位以后的值
+                head = tail = new ListNode(sum % 10);
+            } else {
+                tail.next = new ListNode(sum % 10);
+                tail = tail.next;
+            }
+            // 计算进位值
+            carry = sum / 10;
+            if (l1 != null) {
+                l1 = l1.next;
+            }
+            if (l2 != null) {
+                l2 = l2.next;
+            }
+        }
+        if (carry != 0) {
+            tail.next = new ListNode(carry);
+        }
+        return head;
+    }
+
+    class ListNode {
+        int val;
+        ListNode next;
+        ListNode() {}
+        ListNode(int val) {
+            this.val = val;
+        }
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
 }
