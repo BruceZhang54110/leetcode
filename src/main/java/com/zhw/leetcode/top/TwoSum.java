@@ -47,7 +47,16 @@ public class TwoSum {
         System.out.println(Arrays.asList(twoSum(nums, 5)));
     }
 
+    /**
+     * 两数之和
+     * @param nums
+     * @param target
+     * @return
+     */
     public static  int[] twoSum(int[] nums, int target) {
+        // 根据题目中描述，数组中同一个元素在答案里不能重复出现，利用键值对存放数组值和下标。key为元素，value为元素所在下标
+        // 遍历数组，如果存在key = target - nums[i])，
+        // 则说明 key + num[i] = target，是要寻找的元素，所提返回该key对应的value和当前遍历的元素下标
         Map<Integer, Integer> map = new HashMap<Integer, Integer>(nums.length);
         for (int i = 0; i < nums.length; i++)  {
             // target = nums[i] + xxx

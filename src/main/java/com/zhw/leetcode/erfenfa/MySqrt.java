@@ -6,7 +6,7 @@ package com.zhw.leetcode.erfenfa;
 public class MySqrt {
 
     public static void main(String[] args) {
-        System.out.println(getNum(9));
+        System.out.println(getNum(7));
     }
 
 
@@ -14,9 +14,10 @@ public class MySqrt {
         if (x < 2) {
             return x;
         }
-        int left = 1;
+        int left = 0;
         int right = x;
         while (left <= right) {
+            System.out.println("left:"+left+", right:" + right);
             int mid = (right - left)/2 + left;
             if (mid == x / mid) {
                 return mid;
