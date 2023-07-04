@@ -1,4 +1,4 @@
-package com.zhw.leetcode.test;
+package com.zhw.leetcode.stacktest;
 
 /**
  * 固定容量的智能放String 的栈
