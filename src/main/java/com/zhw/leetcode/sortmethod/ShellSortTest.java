@@ -13,7 +13,7 @@ public class ShellSortTest {
     }
 
     /**
-     * 冒泡排序
+     * 希尔排序
      * @param array
      * @return
      */
