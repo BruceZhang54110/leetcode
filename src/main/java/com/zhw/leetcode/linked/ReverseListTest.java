@@ -4,6 +4,7 @@ package com.zhw.leetcode.linked;
  * 反转链表
  */
 public class ReverseListTest {
+
     public static void main(String[] args) {
         ListNode node1 = new ListNode(1);
         ListNode node2 = new ListNode(2);
@@ -51,6 +52,17 @@ public class ReverseListTest {
     private static ListNode reverseList(ListNode node) {
         ListNode reverseNode = null;
         while(node!= null) {
+            ListNode tmp = node;
+            node = node.next;
+            tmp.next = reverseNode;
+            reverseNode = tmp;
+        }
+        return reverseNode;
+    }
+
+    private static ListNode reverseNodeTest1111(ListNode node) {
+        ListNode reverseNode = null;
+        while (node != null) {
             ListNode tmp = node;
             node = node.next;
             tmp.next = reverseNode;
