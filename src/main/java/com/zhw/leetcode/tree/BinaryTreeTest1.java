@@ -1,6 +1,7 @@
 package com.zhw.leetcode.tree;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
@@ -28,11 +29,16 @@ public class BinaryTreeTest1 {
         root.setRightNode(rightNode);
         List<Integer> integers = test1(root);
         System.out.println(integers.toString());
+
+        List<Integer> integers1 = test2(root);
+        System.out.println(integers1.toString());
+
     }
 
 
     /**
-     * 非递归使用栈模拟过程，前序遍历
+     * 非递归使用栈模拟过程
+     * 前序遍历
      * @param root
      * @return
      */
@@ -47,13 +53,46 @@ public class BinaryTreeTest1 {
             TreeNode node = stack.pop(); // 出栈
             System.out.println(node.val);
             list.add(node.val);
+            // 先将右节点入栈
             if (node.rightNode != null) {
                 stack.push(node.rightNode);
             }
+            // 再将左节点入栈
             if (node.leftNode != null) {
                 stack.push(node.leftNode);
             }
         }
+        return list;
+    }
+
+    /**
+     * 后序遍历：左右中
+     * 先序遍历是中左右，对于后续遍历只需要将左右两个节点入栈调转，最后再加数组反转，就得到了后续遍历的结果
+     * @param root
+     * @return
+     */
+    private static List<Integer> test2(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        List<Integer> list = new ArrayList<>(0);
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop(); // 出栈
+            System.out.println(node.val);
+            list.add(node.val);
+            // 先将左节点入栈
+            if (node.leftNode != null) {
+                stack.push(node.leftNode);
+            }
+            // 再将右节点入栈
+            if (node.rightNode != null) {
+                stack.push(node.rightNode);
+            }
+        }
+        // 反转数组
+        Collections.reverse(list);
         return list;
     }
 
