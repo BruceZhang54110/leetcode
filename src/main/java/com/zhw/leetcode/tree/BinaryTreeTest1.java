@@ -1,5 +1,7 @@
 package com.zhw.leetcode.tree;
 
+import apple.laf.JRSUIUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -27,18 +29,16 @@ public class BinaryTreeTest1 {
         root.setLeftNode(leftNode);
         TreeNode rightNode = new TreeNode(2);
         root.setRightNode(rightNode);
-        List<Integer> integers = test1(root);
-        System.out.println(integers.toString());
 
-        List<Integer> integers1 = test2(root);
-        System.out.println(integers1.toString());
+        List<Integer> integers1 = test1(root);
+        System.out.println(integers1);
 
     }
 
 
     /**
      * 非递归使用栈模拟过程
-     * 前序遍历
+     * 前序遍历 中左右
      * @param root
      * @return
      */
@@ -63,6 +63,31 @@ public class BinaryTreeTest1 {
             }
         }
         return list;
+    }
+
+    /**
+     * 中序遍历，使用一个指针跌点节点，一路向左入栈，最后左节点为空时，开始出栈，那么
+     * @return
+     */
+    public static List<Integer> test3(TreeNode root) {
+        List<Integer> result = new ArrayList<>(0);
+        if (root == null) {
+            return result;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode curr = root; // 指针进行迭代
+        while (curr != null || !stack.isEmpty()) {
+            if (curr != null) {
+                stack.push(curr);
+                curr = curr.leftNode;
+            } else {
+                curr = stack.pop(); // 出栈
+                result.add(curr.val);
+                curr = curr.rightNode;
+            }
+        }
+        return result;
+
     }
 
     /**
