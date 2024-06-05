@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>Code88.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #8c8c8c; font-style: italic;}
+.s2 { color: #080808;}
+.s3 { color: #0033b3;}
+.s4 { color: #1750eb;}
+.s5 { color: #067d17;}
+.s6 { color: #8c8c8c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Code88.java</font>
+</center></td></tr></table>
+<pre><span class="s0">/**</span>
+ <span class="s0">* 88. 合并两个有序数组</span>
+ <span class="s0">* 给你两个按 非递减顺序 排列的整数数组 nums1 和 nums2，另有两个整数 m 和 n ，分别表示 nums1 和 nums2 中的元素数目。</span>
+ <span class="s0">* 请你 合并 nums2 到 nums1 中，使合并后的数组同样按 非递减顺序 排列。</span>
+ <span class="s0">* 注意：</span>
+ <span class="s0">* 1. nums1.length == m + n</span>
+ <span class="s0">* 2. nums2.length == n</span>
+ <span class="s0">* 3. 0 &lt;= m, n &lt;= 200</span>
+ <span class="s0">* 4. 1 &lt;= m + n &lt;= 200</span>
+ <span class="s0">* 5. -109 &lt;= nums1[i], nums2[j] &lt;= 109</span>
+ <span class="s0">* </span><span class="s1">&lt;p&gt;</span>
+ <span class="s0">*     示例 1：</span>
+ <span class="s0">*     输入：nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3</span>
+ <span class="s0">*     输出：[1,2,2,3,5,6]</span>
+ <span class="s0">*   解题思路：</span>
+ <span class="s0">*   使用双指针法，从后向前遍历，nums1和nums2的元素，谁更大，谁就放到nums1末尾，逐渐从后向前放置。</span>
+ <span class="s0">*   如果需要nums1或者nums2下标遍历结束，则选取另一个数组元素放置。</span>
+ <span class="s0">*/</span>
+<span class="s3">public class </span><span class="s2">Code88 {</span>
+
+    <span class="s3">public static void </span><span class="s2">main(String[] args) {</span>
+        <span class="s3">int</span><span class="s2">[] nums1 = </span><span class="s3">new int</span><span class="s2">[]{</span><span class="s4">1</span><span class="s2">, </span><span class="s4">2</span><span class="s2">, </span><span class="s4">3</span><span class="s2">, </span><span class="s4">4</span><span class="s2">, </span><span class="s4">0</span><span class="s2">, </span><span class="s4">0</span><span class="s2">, </span><span class="s4">0</span><span class="s2">};</span>
+        <span class="s3">int</span><span class="s2">[] nums2 = </span><span class="s3">new int</span><span class="s2">[]{</span><span class="s4">2</span><span class="s2">, </span><span class="s4">5</span><span class="s2">, </span><span class="s4">6</span><span class="s2">};</span>
+        <span class="s2">merge(nums1, </span><span class="s4">4</span><span class="s2">, nums2, </span><span class="s4">3</span><span class="s2">);</span>
+        <span class="s3">for </span><span class="s2">(</span><span class="s3">int </span><span class="s2">i = </span><span class="s4">0</span><span class="s2">; i &lt; nums1.length; i++) {</span>
+            <span class="s2">System.out.print(nums1[i] + </span><span class="s5">&quot; &quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">/**</span>
+     <span class="s0">* 合并方法</span>
+     <span class="s0">* </span><span class="s6">@param </span><span class="s0">nums1 数组1</span>
+     <span class="s0">* </span><span class="s6">@param </span><span class="s0">m 数组1的元素个数</span>
+     <span class="s0">* </span><span class="s6">@param </span><span class="s0">nums2 数组2</span>
+     <span class="s0">* </span><span class="s6">@param </span><span class="s0">n 数组2的元素个数</span>
+     <span class="s0">*/</span>
+    <span class="s3">public static void </span><span class="s2">merge(</span><span class="s3">int</span><span class="s2">[] nums1, </span><span class="s3">int </span><span class="s2">m, </span><span class="s3">int</span><span class="s2">[] nums2, </span><span class="s3">int </span><span class="s2">n) {</span>
+        <span class="s3">int </span><span class="s2">p1 = m - </span><span class="s4">1</span><span class="s2">;</span>
+        <span class="s3">int </span><span class="s2">p2 = n - </span><span class="s4">1</span><span class="s2">;</span>
+        <span class="s3">int </span><span class="s2">p = nums1.length - </span><span class="s4">1</span><span class="s2">;</span>
+        <span class="s3">int </span><span class="s2">curr;</span>
+        <span class="s3">while </span><span class="s2">(p1 &gt; -</span><span class="s4">1 </span><span class="s2">&amp;&amp; p2 &gt; -</span><span class="s4">1</span><span class="s2">) {</span>
+            <span class="s3">if </span><span class="s2">(p1 == -</span><span class="s4">1</span><span class="s2">) {</span>
+                <span class="s2">curr = nums2[p2--];</span>
+            <span class="s2">} </span><span class="s3">else if </span><span class="s2">(p2 == -</span><span class="s4">1</span><span class="s2">) {</span>
+                <span class="s2">curr = nums1[p1--];</span>
+            <span class="s2">} </span><span class="s3">else if </span><span class="s2">(nums1[p1] &gt; nums2[p2]) {</span>
+                <span class="s2">curr = nums1[p1--];</span>
+            <span class="s2">} </span><span class="s3">else </span><span class="s2">{</span>
+                <span class="s2">curr = nums2[p2--];</span>
+            <span class="s2">}</span>
+            <span class="s2">nums1[p--] = curr;</span>
+        <span class="s2">}</span>
+
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>

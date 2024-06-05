@@ -1,5 +1,7 @@
 package com.zhw.leetcode.heaptest;
 
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
+
 import java.util.Arrays;
 
 /**
@@ -10,15 +12,17 @@ public class Test1 {
 
 
     public static void main(String[] args) {
-        int arr[] = {6,9,7,8,5,0,1,2,4,3};
+        int arr[] = {6,9,7,8,5,0,1,2,4,3,67,89,12,45,32,63,18,89,6666};
+        long start = System.currentTimeMillis();
         sort(arr);
+        System.out.println(System.currentTimeMillis() - start);
         System.out.println(Arrays.toString(arr));
     }
 
     public static void sort(int[] arr) {
         int length = arr.length;
         // 1. 建堆
-        // 找最后一个非孩子节点，如果孩子节点下标是i ,则父亲节点下标是 (i-1)/2
+        // 找最后一个非孩子节点，如果孩节点下标是i ,则父亲节点下标是 (i-1)/2
         // (n-1-1)/2
         // (n-2)/2 =>  n/2-1
         for (int i = (length - 2) / 2; i >=0 ; i--) {

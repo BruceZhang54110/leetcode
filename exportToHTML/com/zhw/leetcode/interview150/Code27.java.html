@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>Code27.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #1750eb;}
+.s4 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Code27.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.zhw.leetcode.interview150;</span>
+
+<span class="s2">/**</span>
+ <span class="s2">* 27. 移除元素</span>
+ <span class="s2">* 给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素。元素的顺序可能发生改变。</span>
+ <span class="s2">* 然后返回 nums 中与 val 不同的元素的数量。</span>
+ <span class="s2">*</span>
+ <span class="s2">* 假设 nums 中不等于 val 的元素数量为 k，要通过此题，您需要执行以下操作：</span>
+ <span class="s2">*</span>
+ <span class="s2">* 更改 nums 数组，使 nums 的前 k 个元素包含不等于 val 的元素。nums 的其余元素和 nums 的大小并不重要。</span>
+ <span class="s2">* 返回 k。</span>
+ <span class="s2">*</span>
+ <span class="s2">*/</span>
+<span class="s0">public class </span><span class="s1">Code27 {</span>
+
+    <span class="s0">public static void </span><span class="s1">main(String[] args) {</span>
+        <span class="s0">int</span><span class="s1">[] nums = {</span><span class="s3">0</span><span class="s1">,</span><span class="s3">1</span><span class="s1">,</span><span class="s3">2</span><span class="s1">,</span><span class="s3">2</span><span class="s1">,</span><span class="s3">3</span><span class="s1">,</span><span class="s3">0</span><span class="s1">,</span><span class="s3">4</span><span class="s1">,</span><span class="s3">2</span><span class="s1">};</span>
+        <span class="s0">int </span><span class="s1">result = removeElement(nums,</span><span class="s3">2</span><span class="s1">);</span>
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s3">0</span><span class="s1">; i &lt; result; i++) {</span>
+            <span class="s1">System.out.print(nums[i] + </span><span class="s4">&quot; &quot;</span><span class="s1">);</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static int </span><span class="s1">removeElement(</span><span class="s0">int</span><span class="s1">[] nums, </span><span class="s0">int </span><span class="s1">val) {</span>
+        <span class="s0">int </span><span class="s1">left = </span><span class="s3">0</span><span class="s1">;</span>
+        <span class="s0">int </span><span class="s1">right = nums.length;</span>
+        <span class="s0">while </span><span class="s1">(left &lt; right) {</span>
+            <span class="s0">if </span><span class="s1">(nums[left] == val) {</span>
+                <span class="s1">nums[left] = nums[right - </span><span class="s3">1</span><span class="s1">];</span>
+                <span class="s1">right--;</span>
+            <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">left++;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">right;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>
