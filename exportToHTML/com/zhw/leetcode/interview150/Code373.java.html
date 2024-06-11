@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>Code373.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Code373.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.zhw.leetcode.interview150;</span>
+<span class="s0">import </span><span class="s1">java.util.ArrayList;</span>
+<span class="s0">import </span><span class="s1">java.util.List;</span>
+<span class="s0">import </span><span class="s1">java.util.PriorityQueue;</span>
+<span class="s2">/**</span>
+ <span class="s2">* 373. 查找和最小的 K 对数字</span>
+ <span class="s2">* 已解答</span>
+ <span class="s2">* 中等</span>
+ <span class="s2">* 相关标签</span>
+ <span class="s2">* 相关企业</span>
+ <span class="s2">* 给定两个以 非递减顺序排列 的整数数组 nums1 和 nums2 , 以及一个整数 k 。</span>
+ <span class="s2">*</span>
+ <span class="s2">* 定义一对值 (u,v)，其中第一个元素来自 nums1，第二个元素来自 nums2 。</span>
+ <span class="s2">*</span>
+ <span class="s2">* 请找到和最小的 k 个数对 (u1,v1),  (u2,v2)  ...  (uk,vk) 。</span>
+ <span class="s2">*</span>
+ <span class="s2">* 示例 1:</span>
+ <span class="s2">*</span>
+ <span class="s2">* 输入: nums1 = [1,7,11], nums2 = [2,4,6], k = 3</span>
+ <span class="s2">* 输出: [1,2],[1,4],[1,6]</span>
+ <span class="s2">* 解释: 返回序列中的前 3 对数：</span>
+ <span class="s2">*      [1,2],[1,4],[1,6],[7,2],[7,4],[11,2],[7,6],[11,4],[11,6]</span>
+ <span class="s2">*/</span>
+<span class="s0">public class </span><span class="s1">Code373 {</span>
+    <span class="s0">public static void </span><span class="s1">main(String[] args) {</span>
+        <span class="s1">List&lt;List&lt;Integer&gt;&gt; lists = kSmallestPairs(</span><span class="s0">new int</span><span class="s1">[]{</span><span class="s3">1</span><span class="s1">, </span><span class="s3">7</span><span class="s1">, </span><span class="s3">11</span><span class="s1">}, </span><span class="s0">new int</span><span class="s1">[]{</span><span class="s3">2</span><span class="s1">, </span><span class="s3">4</span><span class="s1">, </span><span class="s3">6</span><span class="s1">}, </span><span class="s3">3</span><span class="s1">);</span>
+        <span class="s1">System.out.println(lists);</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">public static </span><span class="s1">List&lt;List&lt;Integer&gt;&gt; kSmallestPairs(</span><span class="s0">int</span><span class="s1">[] nums1, </span><span class="s0">int</span><span class="s1">[] nums2, </span><span class="s0">int </span><span class="s1">k) {</span>
+        <span class="s0">int </span><span class="s1">n = nums1.length;</span>
+        <span class="s0">int </span><span class="s1">m = nums2.length;</span>
+        <span class="s1">List ans = </span><span class="s0">new </span><span class="s1">ArrayList&lt;List&lt;Integer&gt;&gt;(k); </span><span class="s2">// 预分配空间</span>
+        <span class="s2">// 构造优先队列，指定升序排序方式（小根堆）</span>
+        <span class="s1">PriorityQueue&lt;</span><span class="s0">int</span><span class="s1">[]&gt; pq = </span><span class="s0">new </span><span class="s1">PriorityQueue&lt;&gt;((a, b) -&gt; a[</span><span class="s3">0</span><span class="s1">] - b[</span><span class="s3">0</span><span class="s1">]);</span>
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s3">0</span><span class="s1">; i &lt; Math.min(n, k); i++) { </span><span class="s2">// 至多k个</span>
+            <span class="s1">pq.add(</span><span class="s0">new int</span><span class="s1">[]{nums1[i] + nums2[</span><span class="s3">0</span><span class="s1">], i, </span><span class="s3">0</span><span class="s1">}); </span><span class="s2">// (0,0 1,0 2,0 ... k,0)</span>
+        <span class="s1">}</span>
+        <span class="s0">while </span><span class="s1">(!pq.isEmpty() &amp;&amp; ans.size() &lt; k) {</span>
+            <span class="s0">int</span><span class="s1">[] p = pq.poll(); </span><span class="s2">// 出堆，堆中最小的</span>
+            <span class="s0">int </span><span class="s1">i = p[</span><span class="s3">1</span><span class="s1">];</span>
+            <span class="s0">int </span><span class="s1">j = p[</span><span class="s3">2</span><span class="s1">];</span>
+            <span class="s1">ans.add(List.of(nums1[i], nums2[j]));</span>
+            <span class="s0">if </span><span class="s1">(j + </span><span class="s3">1 </span><span class="s1">&lt; m) {</span>
+                <span class="s1">pq.add(</span><span class="s0">new int</span><span class="s1">[]{nums1[i] + nums2[j + </span><span class="s3">1</span><span class="s1">], i, j + </span><span class="s3">1</span><span class="s1">});</span>
+            <span class="s1">}</span>
+
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">ans;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

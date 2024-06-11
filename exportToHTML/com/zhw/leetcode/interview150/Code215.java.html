@@ -1,0 +1,82 @@
+<html>
+<head>
+<title>Code215.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Code215.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.zhw.leetcode.interview150;</span>
+
+<span class="s2">/**</span>
+ <span class="s2">* 215. 数组中的第K个最大元素</span>
+ <span class="s2">* 给定整数数组 nums 和整数 k，请返回数组中第 k 个最大的元素。</span>
+ <span class="s2">* 请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。</span>
+ <span class="s2">* 你必须设计并实现时间复杂度为 O(n) 的算法解决此问题。</span>
+ <span class="s2">* 示例 1:</span>
+ <span class="s2">* 输入: [3,2,1,5,6,4], k = 2</span>
+ <span class="s2">* 输出: 5</span>
+ <span class="s2">* 示例 2:</span>
+ <span class="s2">* 输入: [3,2,3,1,2,4,5,5,6], k = 4</span>
+ <span class="s2">* 输出: 4</span>
+ <span class="s2">*/</span>
+<span class="s0">public class </span><span class="s1">Code215 {</span>
+    <span class="s0">public static void </span><span class="s1">main(String[] args) {</span>
+        <span class="s0">int</span><span class="s1">[] nums = {</span><span class="s3">3</span><span class="s1">,</span><span class="s3">2</span><span class="s1">,</span><span class="s3">1</span><span class="s1">,</span><span class="s3">5</span><span class="s1">,</span><span class="s3">6</span><span class="s1">,</span><span class="s3">4</span><span class="s1">};</span>
+        <span class="s1">System.out.println(findKthLargest(nums, </span><span class="s3">2</span><span class="s1">));</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">public static int </span><span class="s1">findKthLargest(</span><span class="s0">int</span><span class="s1">[] nums, </span><span class="s0">int </span><span class="s1">k) {</span>
+        <span class="s0">int</span><span class="s1">[] heap = nums;</span>
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = (k-</span><span class="s3">2</span><span class="s1">)/</span><span class="s3">2</span><span class="s1">;  i&gt;=</span><span class="s3">0</span><span class="s1">; i--) {</span>
+            <span class="s1">sift(i, k-</span><span class="s3">1</span><span class="s1">, heap);</span>
+        <span class="s1">}</span>
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = k; i &lt; nums.length; i++) {</span>
+            <span class="s0">if </span><span class="s1">(nums[i] &gt; heap[</span><span class="s3">0</span><span class="s1">]) {</span>
+                <span class="s1">heap[</span><span class="s3">0</span><span class="s1">] = nums[i];</span>
+                <span class="s1">sift(</span><span class="s3">0</span><span class="s1">, k-</span><span class="s3">1</span><span class="s1">, heap);</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">heap[</span><span class="s3">0</span><span class="s1">];</span>
+
+    <span class="s1">}</span>
+
+
+    <span class="s2">/**</span>
+     <span class="s2">* 调整为小根堆</span>
+     <span class="s2">*/</span>
+    <span class="s0">public static void </span><span class="s1">sift(</span><span class="s0">int </span><span class="s1">low, </span><span class="s0">int </span><span class="s1">high, </span><span class="s0">int</span><span class="s1">[] arr) {</span>
+        <span class="s0">int </span><span class="s1">i = low;</span>
+        <span class="s0">int </span><span class="s1">j = </span><span class="s3">2 </span><span class="s1">* i + </span><span class="s3">1</span><span class="s1">; </span><span class="s2">// 左孩子的下标</span>
+        <span class="s0">int </span><span class="s1">temp = arr[low]; </span><span class="s2">// 根节点</span>
+        <span class="s0">while </span><span class="s1">(j &lt;= high) { </span><span class="s2">// 只要j位置有元素</span>
+            <span class="s0">if </span><span class="s1">((j+</span><span class="s3">1</span><span class="s1">) &lt;= high &amp;&amp; arr[j] &gt; arr[j+</span><span class="s3">1</span><span class="s1">]) {</span>
+                <span class="s1">j = j+</span><span class="s3">1</span><span class="s1">; </span><span class="s2">// 如果右孩子比左孩子小，那么指向右孩子</span>
+            <span class="s1">}</span>
+            <span class="s0">if </span><span class="s1">(temp &gt; arr[j]) {</span>
+                <span class="s1">arr[i] = arr[j];</span>
+                <span class="s1">i = j;</span>
+                <span class="s1">j = </span><span class="s3">2</span><span class="s1">*i+</span><span class="s3">1</span><span class="s1">;</span>
+            <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">arr[i] = temp;</span>
+                <span class="s0">break</span><span class="s1">;</span>
+            <span class="s1">}</span>
+
+        <span class="s1">}</span>
+        <span class="s1">arr[i] = temp;</span>
+
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>
