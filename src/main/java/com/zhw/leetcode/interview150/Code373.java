@@ -1,5 +1,6 @@
 package com.zhw.leetcode.interview150;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.PriorityQueue;
 /**
@@ -35,15 +36,19 @@ public class Code373 {
         // 构造优先队列，指定升序排序方式（小根堆）
         PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);
         for (int i = 0; i < Math.min(n, k); i++) { // 至多k个
-            pq.add(new int[]{nums1[i] + nums2[0], i, 0}); // (0,0 1,0 2,0 ... k,0)
+            int[] e = {nums1[i] + nums2[0], i, 0};
+            System.out.println("构造优先队列：" + Arrays.toString(e));
+            pq.add(e); // (0,0 1,0 2,0 ... k,0)
         }
-        while (!pq.isEmpty() && ans.size() < k) {
+        while (!pq.isEmpty() && ans.size() < k) { // 堆不为空且结果集元素个数小于k
             int[] p = pq.poll(); // 出堆，堆中最小的
-            int i = p[1];
-            int j = p[2];
+            int i = p[1]; // 根节点nums1数组下标
+            int j = p[2]; // 根节点nums2数组下标
             ans.add(List.of(nums1[i], nums2[j]));
             if (j + 1 < m) {
-                pq.add(new int[]{nums1[i] + nums2[j + 1], i, j + 1});
+                int[] e = {nums1[i] + nums2[j + 1], i, j + 1};
+                System.out.println("j:" + Arrays.toString(e));
+                pq.add(e);
             }
 
         }
