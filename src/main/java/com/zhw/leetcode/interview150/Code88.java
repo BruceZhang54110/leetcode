@@ -1,5 +1,7 @@
 package com.zhw.leetcode.interview150;
 
+import java.util.Arrays;
+
 /**
  * 88. 合并两个有序数组
  * 给你两个按 非递减顺序 排列的整数数组 nums1 和 nums2，另有两个整数 m 和 n ，分别表示 nums1 和 nums2 中的元素数目。
@@ -52,6 +54,8 @@ public class Code88 {
                 curr = nums2[p2--];
             }
             nums1[p--] = curr;
+            // 打印
+            // System.out.println(Arrays.toString(nums1));
         }
 
     }

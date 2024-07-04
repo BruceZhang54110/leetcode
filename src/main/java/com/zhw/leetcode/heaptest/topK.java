@@ -30,10 +30,10 @@ public class topK {
         int tmp = arr[low]; // 把堆顶元素存起来
         while (j <= high) { // 只要j位置有元素
             if ( (j + 1) <= high && arr[j] > arr[j + 1]) {
-                j = j + 1; // 如果右孩子比左孩子大，j指向右孩子
+                j = j + 1; // 如果右孩子比左孩子小，j指向右孩子
             }
             if (arr[j] < tmp) {
-                arr[i] = arr[j]; // arr[j] 孩子节点的值比tmp大，把tmp放到arr[i]的位置上
+                arr[i] = arr[j]; // arr[j] 孩子节点的值比tmp小，把tmp放到arr[i]的位置上
                 i = j; // 往下看一层
                 j = 2 * i + 1;
             } else {
@@ -74,6 +74,7 @@ public class topK {
             heap[i] = heap[0];
             heap[0] = tmp;
             // 出一个后，需要向下调整（调整为小根堆），让其满足堆的性质
+            // 逐个出数倒着存放在数组里
             sift(0, i - 1, heap);
         }
         return heap;

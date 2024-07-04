@@ -1,0 +1,113 @@
+<html>
+<head>
+<title>Code151.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #067d17;}
+.s4 { color: #1750eb;}
+.s5 { color: #8c8c8c; font-style: italic;}
+.s6 { color: #0037a6;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Code151.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.zhw.leetcode.jd;</span>
+<span class="s0">import </span><span class="s1">java.util.Arrays;</span>
+<span class="s0">import </span><span class="s1">java.util.Collections;</span>
+<span class="s0">import </span><span class="s1">java.util.List;</span>
+<span class="s2">/**</span>
+ <span class="s2">* 151. 翻转字符串里的单词</span>
+ <span class="s2">* 给定一个字符串，逐个翻转字符串中的每个单词。</span>
+ <span class="s2">* 说明：</span>
+ <span class="s2">* 无空格字符构成一个 单词 。</span>
+ <span class="s2">* 输入字符串可以在前面或者后面包含多余的空格，但是反转后的字符不能包括。</span>
+ <span class="s2">* 如果两个单词间有多余的空格，将反转后单词间的空格减少到只含一个。</span>
+ <span class="s2">* 示例 1：</span>
+ <span class="s2">* 输入：&quot;the sky is blue&quot;</span>
+ <span class="s2">* 输出：&quot;blue is sky the&quot;</span>
+ <span class="s2">*/</span>
+<span class="s0">public class </span><span class="s1">Code151 {</span>
+    <span class="s0">public static void </span><span class="s1">main(String[] args) {</span>
+        <span class="s1">String s = </span><span class="s3">&quot;the sky   is blue&quot;</span><span class="s1">;</span>
+        <span class="s1">StringBuilder sb = trimSpaces(s);</span>
+        <span class="s1">reverse(sb, </span><span class="s4">0</span><span class="s1">, sb.length() - </span><span class="s4">1</span><span class="s1">);</span>
+        <span class="s1">reverseWord(sb);</span>
+        <span class="s1">System.out.println(sb);</span>
+    <span class="s1">}</span>
+    <span class="s2">/**</span>
+     <span class="s2">* 使用java api 翻转</span>
+     <span class="s2">* </span><span class="s5">@param </span><span class="s2">s</span>
+     <span class="s2">* </span><span class="s5">@return</span>
+     <span class="s2">*/</span>
+    <span class="s0">public static </span><span class="s1">String reverseWords1(String s) {</span>
+        <span class="s1">s = s.trim();</span>
+        <span class="s1">List&lt;String&gt; list = Arrays.asList(s.split(</span><span class="s3">&quot;</span><span class="s6">\\</span><span class="s3">s+&quot;</span><span class="s1">));</span>
+        <span class="s1">Collections.reverse(list);</span>
+        <span class="s0">return </span><span class="s1">String.join(</span><span class="s3">&quot; &quot;</span><span class="s1">, list);</span>
+    <span class="s1">}</span>
+    <span class="s2">/**</span>
+     <span class="s2">* 反转字符串</span>
+     <span class="s2">* </span><span class="s5">@param </span><span class="s2">sb</span>
+     <span class="s2">* </span><span class="s5">@param </span><span class="s2">left</span>
+     <span class="s2">* </span><span class="s5">@param </span><span class="s2">right</span>
+     <span class="s2">*/</span>
+    <span class="s0">private static void </span><span class="s1">reverse(StringBuilder sb, </span><span class="s0">int </span><span class="s1">left, </span><span class="s0">int </span><span class="s1">right) {</span>
+        <span class="s0">while </span><span class="s1">(left &lt; right) {</span>
+            <span class="s0">char </span><span class="s1">tmp = sb.charAt(left);</span>
+            <span class="s1">sb.setCharAt(left++, sb.charAt(right));</span>
+            <span class="s1">sb.setCharAt(right--, tmp);</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private static void </span><span class="s1">reverseWord(StringBuilder sb) {</span>
+        <span class="s0">int </span><span class="s1">n = sb.length();</span>
+        <span class="s0">int </span><span class="s1">start = </span><span class="s4">0</span><span class="s1">;</span>
+        <span class="s0">int </span><span class="s1">end = </span><span class="s4">0</span><span class="s1">;</span>
+        <span class="s0">while </span><span class="s1">(start &lt; n) {</span>
+            <span class="s2">// 寻找到单词末尾</span>
+            <span class="s0">while </span><span class="s1">(end &lt; n &amp;&amp; sb.charAt(end) != </span><span class="s3">' '</span><span class="s1">) {</span>
+                <span class="s1">++end;</span>
+            <span class="s1">}</span>
+            <span class="s2">// 反转单词</span>
+            <span class="s1">reverse(sb, start, end - </span><span class="s4">1</span><span class="s1">);</span>
+            <span class="s2">// 更新start 寻找下一个单词</span>
+            <span class="s1">start = end + </span><span class="s4">1</span><span class="s1">;</span>
+            <span class="s1">++end;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private static </span><span class="s1">StringBuilder trimSpaces(String s) {</span>
+        <span class="s0">int </span><span class="s1">left = </span><span class="s4">0</span><span class="s1">;</span>
+        <span class="s0">int </span><span class="s1">right = s.length() - </span><span class="s4">1</span><span class="s1">;</span>
+        <span class="s2">// 去掉字符串开头的空白字符</span>
+        <span class="s0">while </span><span class="s1">(left &lt;= right &amp;&amp; s.charAt(left) == </span><span class="s3">' '</span><span class="s1">) {</span>
+            <span class="s1">++left;</span>
+        <span class="s1">}</span>
+        <span class="s2">// 去掉字符串末尾的空白字符</span>
+        <span class="s0">while </span><span class="s1">(left &lt;= right &amp;&amp; s.charAt(right) == </span><span class="s3">' '</span><span class="s1">) {</span>
+            <span class="s1">--right;</span>
+        <span class="s1">}</span>
+        <span class="s2">// 将字符串之间多余的空白字符去掉</span>
+        <span class="s1">StringBuilder sb = </span><span class="s0">new </span><span class="s1">StringBuilder();</span>
+        <span class="s0">while </span><span class="s1">(left &lt;= right) {</span>
+            <span class="s0">char </span><span class="s1">c = s.charAt(left);</span>
+            <span class="s0">if </span><span class="s1">(c != </span><span class="s3">' '</span><span class="s1">) {</span>
+                <span class="s1">sb.append(c);</span>
+            <span class="s1">} </span><span class="s0">else if </span><span class="s1">(sb.charAt(sb.length() - </span><span class="s4">1</span><span class="s1">) != </span><span class="s3">' '</span><span class="s1">) {</span>
+                <span class="s1">sb.append(c);</span>
+            <span class="s1">}</span>
+            <span class="s1">++left;</span>
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">sb;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>
