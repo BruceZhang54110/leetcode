@@ -5,6 +5,8 @@ import java.util.Arrays;
 /**
  * 堆排序
  * 时间复杂度：O(nlogn)
+ * 利用堆的向下调整性质，假设节点的左右子树都是堆，但自身不是堆，可以通过一次向下的调整来将其变换成一个堆。
+ * 要求升序排序，构造大顶堆
  */
 public class HeapSortTest {
     public static void main(String[] args) {
@@ -14,6 +16,7 @@ public class HeapSortTest {
     }
     /**
      * 调整
+     * 根元素不满足堆，子节点是一个堆
      * @param arr 数组列表
      * @param low 堆的根节点位置
      * @param high 堆的最后一个元素的位置
