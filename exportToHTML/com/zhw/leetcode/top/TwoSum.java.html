@@ -1,0 +1,103 @@
+<html>
+<head>
+<title>TwoSum.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #1750eb;}
+.s4 { color: #8c8c8c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+TwoSum.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.zhw.leetcode.top;</span>
+
+<span class="s0">import </span><span class="s1">java.util.Arrays;</span>
+<span class="s0">import </span><span class="s1">java.util.HashMap;</span>
+<span class="s0">import </span><span class="s1">java.util.Map;</span>
+
+<span class="s2">/**</span>
+ <span class="s2">* 给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。</span>
+ <span class="s2">*</span>
+ <span class="s2">* 你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</span>
+ <span class="s2">*</span>
+ <span class="s2">* 你可以按任意顺序返回答案。</span>
+ <span class="s2">*</span>
+ <span class="s2">*  </span>
+ <span class="s2">*</span>
+ <span class="s2">* 示例 1：</span>
+ <span class="s2">*</span>
+ <span class="s2">* 输入：nums = [2,7,11,15], target = 9</span>
+ <span class="s2">* 输出：[0,1]</span>
+ <span class="s2">* 解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 。</span>
+ <span class="s2">* 示例 2：</span>
+ <span class="s2">*</span>
+ <span class="s2">* 输入：nums = [3,2,4], target = 6</span>
+ <span class="s2">* 输出：[1,2]</span>
+ <span class="s2">* 示例 3：</span>
+ <span class="s2">*</span>
+ <span class="s2">* 输入：nums = [3,3], target = 6</span>
+ <span class="s2">* 输出：[0,1]</span>
+ <span class="s2">*  </span>
+ <span class="s2">*</span>
+ <span class="s2">* 提示：</span>
+ <span class="s2">*</span>
+ <span class="s2">* 2 &lt;= nums.length &lt;= 104</span>
+ <span class="s2">* -109 &lt;= nums[i] &lt;= 109</span>
+ <span class="s2">* -109 &lt;= target &lt;= 109</span>
+ <span class="s2">* 只会存在一个有效答案</span>
+ <span class="s2">* 进阶：你可以想出一个时间复杂度小于 O(n2) 的算法吗？</span>
+ <span class="s2">*</span>
+ <span class="s2">* 来源：力扣（LeetCode）</span>
+ <span class="s2">* 链接：https://leetcode-cn.com/problems/two-sum</span>
+ <span class="s2">* 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</span>
+ <span class="s2">*/</span>
+<span class="s0">public class </span><span class="s1">TwoSum {</span>
+
+    <span class="s0">public static void </span><span class="s1">main(String[] args) {</span>
+        <span class="s0">int</span><span class="s1">[] nums = </span><span class="s0">new int</span><span class="s1">[]{</span><span class="s3">2</span><span class="s1">, </span><span class="s3">3</span><span class="s1">, </span><span class="s3">10</span><span class="s1">, </span><span class="s3">5</span><span class="s1">};</span>
+        <span class="s1">System.out.println(Arrays.toString(twoNumTest(nums, </span><span class="s3">5</span><span class="s1">)));</span>
+    <span class="s1">}</span>
+
+    <span class="s2">/**</span>
+     <span class="s2">* 两数之和</span>
+     <span class="s2">* </span><span class="s4">@param </span><span class="s2">nums</span>
+     <span class="s2">* </span><span class="s4">@param </span><span class="s2">target</span>
+     <span class="s2">* </span><span class="s4">@return</span>
+     <span class="s2">*/</span>
+    <span class="s0">public static  int</span><span class="s1">[] twoSum(</span><span class="s0">int</span><span class="s1">[] nums, </span><span class="s0">int </span><span class="s1">target) {</span>
+        <span class="s2">// 根据题目中描述，数组中同一个元素在答案里不能重复出现，利用键值对存放数组值和下标。key为元素，value为元素所在下标</span>
+        <span class="s2">// 遍历数组，如果存在key = target - nums[i])，</span>
+        <span class="s2">// 则说明 key + num[i] = target，是要寻找的元素，所提返回该key对应的value和当前遍历的元素下标</span>
+        <span class="s1">Map&lt;Integer, Integer&gt; map = </span><span class="s0">new </span><span class="s1">HashMap&lt;Integer, Integer&gt;(nums.length);</span>
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s3">0</span><span class="s1">; i &lt; nums.length; i++)  {</span>
+            <span class="s2">// target = nums[i] + xxx</span>
+            <span class="s0">if </span><span class="s1">(map.containsKey(target - nums[i])) {</span>
+                <span class="s0">return new int</span><span class="s1">[]{map.get(target - nums[i]), i};</span>
+            <span class="s1">}</span>
+            <span class="s1">map.put(nums[i], i);</span>
+        <span class="s1">}</span>
+        <span class="s0">return new int</span><span class="s1">[</span><span class="s3">0</span><span class="s1">];</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static int</span><span class="s1">[] twoNumTest(</span><span class="s0">int</span><span class="s1">[] array, </span><span class="s0">int </span><span class="s1">target) {</span>
+        <span class="s1">Map&lt;Integer, Integer&gt; map = </span><span class="s0">new </span><span class="s1">HashMap&lt;&gt;(array.length);</span>
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s3">0</span><span class="s1">; i &lt; array.length; i++) {</span>
+            <span class="s0">int </span><span class="s1">key = target - array[i];</span>
+            <span class="s0">if </span><span class="s1">(map.containsKey(key)) {</span>
+                <span class="s0">return new int</span><span class="s1">[] {map.get(key), i};</span>
+            <span class="s1">}</span>
+            <span class="s1">map.put(array[i], i);</span>
+        <span class="s1">}</span>
+        <span class="s0">return new int</span><span class="s1">[</span><span class="s3">0</span><span class="s1">];</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

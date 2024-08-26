@@ -44,7 +44,7 @@ public class TwoSum {
 
     public static void main(String[] args) {
         int[] nums = new int[]{2, 3, 10, 5};
-        System.out.println(Arrays.asList(twoSum(nums, 5)));
+        System.out.println(Arrays.toString(twoNumTest(nums, 5)));
     }
 
     /**
@@ -64,6 +64,18 @@ public class TwoSum {
                 return new int[]{map.get(target - nums[i]), i};
             }
             map.put(nums[i], i);
+        }
+        return new int[0];
+    }
+
+    public static int[] twoNumTest(int[] array, int target) {
+        Map<Integer, Integer> map = new HashMap<>(array.length);
+        for (int i = 0; i < array.length; i++) {
+            int key = target - array[i];
+            if (map.containsKey(key)) {
+                return new int[] {map.get(key), i};
+            }
+            map.put(array[i], i);
         }
         return new int[0];
     }
